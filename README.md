@@ -4,6 +4,8 @@
 
 输入沪深 A 股代码，自动获取前复权行情并生成可审计的缠论工程候选结构。所有结构事件同时保留 `structure_at`（结构发生时点）、`confirmed_at`（确认时点）与最早可执行时点，避免未来函数。
 
+**在线演示**：http://47.93.156.155:3000 （阿里云 ECS 部署实例）
+
 ![缠镜主界面](screenshots/main-view.png)
 
 ## 功能特性
@@ -66,6 +68,24 @@ npm run dev
 ```bash
 npm run build
 npm test
+```
+
+## 部署
+
+项目当前部署于阿里云 ECS（Alibaba Cloud Linux 3，北京地域），Node.js 22 + `vinext start` 生产服务器，pm2 守护进程并已配置开机自启，监听 3000 端口。
+
+服务器上的常用运维命令：
+
+```bash
+pm2 status              # 查看进程状态
+pm2 logs chan-lab       # 查看运行日志
+pm2 restart chan-lab    # 重启服务
+```
+
+部署路径为 `/opt/chan-lab`。更新代码后需重新构建并重启：
+
+```bash
+npm install && npm run build && pm2 restart chan-lab
 ```
 
 ## 项目结构
